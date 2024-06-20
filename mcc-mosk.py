@@ -122,29 +122,29 @@ wait_for_condition("kubectl get cluster -o wide -n mosk", "READY", "true")
 namespace = "mosk"
 run_command(f"kubectl -n {namespace} get secrets {namespace}-kubeconfig -o jsonpath='{{.data.admin\\.conf}}' | base64 -d | sed 's/:5443/:443/g' | tee mosk.kubeconfig")
 
-# Export KUBECONFIG environment variable
-mos_kubeconfig_file = os.path.join(current_dir, "mosk.kubeconfig")
-if os.path.exists(mos_kubeconfig_file):
-    os.environ["KUBECONFIG"] = mos_kubeconfig_file
-else:
-    raise Exception(f"Kubeconfig file not found: {mos_kubeconfig_file}")
+# # Export KUBECONFIG environment variable
+# mos_kubeconfig_file = os.path.join(current_dir, "mosk.kubeconfig")
+# if os.path.exists(mos_kubeconfig_file):
+#     os.environ["KUBECONFIG"] = mos_kubeconfig_file
+# else:
+#     raise Exception(f"Kubeconfig file not found: {mos_kubeconfig_file}")
 
-# Step 15: Check ceph keyrings and health
-run_command("kubectl -n openstack-ceph-shared get secrets openstack-ceph-keys -o yaml")
-run_command("kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph -s")
+# # Step 15: Check ceph keyrings and health
+# run_command("kubectl -n openstack-ceph-shared get secrets openstack-ceph-keys -o yaml")
+# run_command("kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph -s")
 
-# Step 16: Apply osdpl
-run_command("kubectl apply -f mosk/10-osdpl/osdpl-secret.yaml")
-run_command("kubectl apply -f mosk/10-osdpl/osdpl.yaml")
+# # Step 16: Apply osdpl
+# run_command("kubectl apply -f mosk/10-osdpl/osdpl-secret.yaml")
+# run_command("kubectl apply -f mosk/10-osdpl/osdpl.yaml")
 
-# Step 17: Check osdpl status
-time.sleep(30)
-wait_for_condition("kubectl -n openstack get osdplst -o wide", "CONTROLLER", "APPLIED")
+# # Step 17: Check osdpl status
+# time.sleep(30)
+# wait_for_condition("kubectl -n openstack get osdplst -o wide", "CONTROLLER", "APPLIED")
 
-# Export KUBECONFIG environment variable
-os.environ["KUBECONFIG"] = kubeconfig_file
+# # Export KUBECONFIG environment variable
+# os.environ["KUBECONFIG"] = kubeconfig_file
 
-# Wait for Cluster to be Ready
-wait_for_condition("kubectl get cluster -o wide -n mosk", "READY", "true")
+# # Wait for Cluster to be Ready
+# wait_for_condition("kubectl get cluster -o wide -n mosk", "READY", "true")
 
 print("Deployment completed successfully.")

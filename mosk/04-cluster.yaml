@@ -53,7 +53,7 @@ spec:
               retentionTime: 2d
               watchDogAlertEnabled: false
       publicKeys:
-        - name: bootstrap-key
+        - name: mosk
       audit:
         auditd:
           enabled: false
