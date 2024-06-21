@@ -45,18 +45,18 @@ apply_kubectl() {
   sleep 30
 }
 
-apply_kubectl "mosk/01-namespace.yaml"
-kubectl get publickey -o yaml bootstrap-key | sed "s|namespace: default|namespace: ${NAMESPACE}|" | kubectl apply -f -
-apply_kubectl "mosk/02-metallbconfig.yaml"
-apply_kubectl "mosk/03-bmh/01-bmh-master.yaml"
-apply_kubectl "mosk/03-bmh/02-bmh-cmp-hc.yaml"
-apply_kubectl "mosk/04-cluster.yaml"
-apply_kubectl "mosk/05-bmhp-cmp.yaml"
-apply_kubectl "mosk/05-bmhp-ctl.yaml"
-apply_kubectl "mosk/06-l2template.yaml"
-apply_kubectl "mosk/07-subnet.yaml"
-apply_kubectl "mosk/08-machine/01-machine-ctl.yaml"
-apply_kubectl "mosk/08-machine/02-machine-cmp.yaml"
-apply_kubectl "mosk/09-kcc.yaml"
+# apply_kubectl "mosk/01-namespace.yaml"
+# kubectl get publickey -o yaml bootstrap-key | sed "s|namespace: default|namespace: ${NAMESPACE}|" | kubectl apply -f -
+# apply_kubectl "mosk/02-metallbconfig.yaml"
+# apply_kubectl "mosk/03-bmh/01-bmh-master.yaml"
+# apply_kubectl "mosk/03-bmh/02-bmh-cmp-hc.yaml"
+# apply_kubectl "mosk/04-cluster.yaml"
+# apply_kubectl "mosk/05-bmhp-cmp.yaml"
+# apply_kubectl "mosk/05-bmhp-ctl.yaml"
+# apply_kubectl "mosk/06-l2template.yaml"
+# apply_kubectl "mosk/07-subnet.yaml"
+# apply_kubectl "mosk/08-machine/01-machine-ctl.yaml"
+# apply_kubectl "mosk/08-machine/02-machine-cmp.yaml"
+# apply_kubectl "mosk/09-kcc.yaml"
 
 echo "04-mosk-setup.sh completed successfully."
