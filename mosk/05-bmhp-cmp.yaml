@@ -8,7 +8,7 @@ kind: BareMetalHostProfile
 spec:
   devices:
     - device:
-        byName: /dev/sda
+        byPath: /dev/sda
         minSize: 60Gi
         wipeDevice:
           eraseMetadata:
@@ -27,19 +27,19 @@ spec:
         - name: lvm_root_part
           size: 0
     - device:
-        byName: /dev/sdb
+        byPath: /dev/sdb
         minSize: 30Gi
         wipeDevice:
           eraseMetadata:
             enabled: true
     - device:
-        byName: /dev/sdc
+        byPath: /dev/sdc
         minSize: 30Gi
         wipeDevice:
           eraseMetadata:
             enabled: true
     - device:
-        byName: /dev/sdd
+        byPath: /dev/sdd
         minSize: 30Gi
         wipeDevice:
           eraseMetadata:
