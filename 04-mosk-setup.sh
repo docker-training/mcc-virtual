@@ -1,26 +1,21 @@
 #!/bin/bash
 
-# Function to get the latest MOSK release
-get_latest_mosk_release() {
-  kubectl get clusterreleases -o json | jq -r '.items[].metadata.name' | grep '^mosk' | sort -V | tail -n 1
-}
+# Set the necessary variables
+NAMESPACE="mosk"
+MOSK_RELEASE="mosk-17-1-4-24-1-4"
+
+# Check if the required variables are set
+if [[ -z "$NAMESPACE" || -z "$MOSK_RELEASE" ]]; then
+  echo "Error: Required variables are not set or files are missing."
+  echo "Please ensure NAMESPACE, MOSK_RELEASE are defined and SSH key exists at $SSH_KEY_PATH."
+  exit 1
+fi
 
 # Get the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Export Kubeconfig
-export KUBECONFIG=${SCRIPT_DIR}/kaas-bootstrap/kubeconfig-kaas-mgmt
-
-# Set the necessary variables
-MOSK_RELEASE=$(get_latest_mosk_release)
-NAMESPACE="mosk"
-
-# Check if the required variables are set
-if [[ -z "$NAMESPACE" || -z "$MOSK_RELEASE" ]]; then
-  echo "Error: Required variables are not set or files are missing."
-  echo "Please ensure NAMESPACE and MOSK_RELEASE are defined."
-  exit 1
-fi
+export KUBECONFIG=${SCRIPT_DIR}/kubeconfig-kaas-mgmt
 
 # Read KVM_NODE_IP from hosts.txt file
 if [ ! -f "${SCRIPT_DIR}/hosts.txt" ]; then
