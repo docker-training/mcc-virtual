@@ -5,6 +5,9 @@ get_latest_mosk_release() {
   kubectl get clusterreleases -o json | jq -r '.items[].metadata.name' | grep '^mosk' | sort -V | tail -n 1
 }
 
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Export Kubeconfig
 export KUBECONFIG=${SCRIPT_DIR}/kubeconfig-kaas-mgmt
 
@@ -18,9 +21,6 @@ if [[ -z "$NAMESPACE" || -z "$MOSK_RELEASE" ]]; then
   echo "Please ensure NAMESPACE and MOSK_RELEASE are defined."
   exit 1
 fi
-
-# Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Read KVM_NODE_IP from hosts.txt file
 if [ ! -f "${SCRIPT_DIR}/hosts.txt" ]; then
