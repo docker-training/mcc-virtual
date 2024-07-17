@@ -2,7 +2,7 @@
 
 # Set the necessary variables
 NAMESPACE="mosk"
-MOSK_RELEASE="mosk-17-1-4-24-1-4"
+MOSK_RELEASE="mosk-17-2-0-24-2"
 
 # Check if the required variables are set
 if [[ -z "$NAMESPACE" || -z "$MOSK_RELEASE" ]]; then
