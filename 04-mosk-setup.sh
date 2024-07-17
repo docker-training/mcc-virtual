@@ -9,7 +9,7 @@ get_latest_mosk_release() {
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Export Kubeconfig
-export KUBECONFIG=${SCRIPT_DIR}/kaas-mgmt
+#export KUBECONFIG=${SCRIPT_DIR}/kaas-bootstrap/kaas-mgmt
 
 # Set the necessary variables
 MOSK_RELEASE=$(get_latest_mosk_release)
